@@ -150,7 +150,16 @@ function Stepper({ current }) {
 function Header({ onNew, onSearch }) {
   return (
     <header style={{ position: "sticky", top: 0, zIndex: 50, borderBottom: `1px solid ${C.border}`, background: "rgba(255,255,255,0.96)", backdropFilter: "blur(16px)" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "12px 32px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
+      <div style={{
+  maxWidth: 1280,
+  margin: "0 auto",
+  padding: "12px 20px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  gap: 16,
+  flexWrap: "wrap"
+}}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <LogoIcon size={40} />
           <div>
@@ -601,9 +610,18 @@ export default function IntelliCredit() {
       <div style={{ minHeight:"100vh", background:"#f8fafc", fontFamily:"'DM Sans',system-ui,sans-serif" }}>
         {deleteTarget && <DeleteModal company={deleteTarget.company} onConfirm={confirmDelete} onCancel={()=>setDeleteTarget(null)} />}
         <Header onNew={handleNewAppraisal} onSearch={setSearchQ} />
-        <main style={{ maxWidth:1280, margin:"0 auto", padding:"32px" }}>
+        <main style={{
+  maxWidth:1280,
+  margin:"0 auto",
+  padding:"32px 20px"
+}}>
 
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:16, marginBottom:36 }}>
+          <div style={{
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(220px,1fr))",
+  gap: 16,
+  marginBottom: 36
+}}>
             <MetricCard label="Total Appraisals" value={cases.length} icon="📁" />
             <MetricCard label="Completed" value={done} color={C.emerald} icon="✅" />
             <MetricCard label="In Progress" value={pending} color={C.amber} icon="⏳" />
@@ -730,7 +748,7 @@ export default function IntelliCredit() {
         {step===0 && (
           <div style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:20, padding:32 }}>
             <h3 style={{ fontSize:15, fontWeight:700, color:C.navy, marginBottom:24 }}>Borrower Information</h3>
-            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:20 }}>
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))", gap:20 }}>
               <Field label="Company Name" field="company" placeholder="ABC Industries Pvt Ltd" />
               <Field label="CIN Number" field="cin" placeholder="U12345MH2015PTC123456" hint="Exactly 21 characters" />
               <Field label="Industry Type" field="industry" placeholder="Manufacturing / IT / Textiles…" />
@@ -780,7 +798,8 @@ export default function IntelliCredit() {
                 </div>
               )}
             </div>
-            <div style={{ width:280 }}>
+            <div style={{width:"100%",
+maxWidth:280 }}>
               <div style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:16, padding:20 }}>
                 <h4 style={{ fontWeight:700, marginBottom:16, fontSize:14 }}>Mandatory Documents</h4>
                 {mandatoryStatus().map(({doc,ok})=>(
@@ -819,7 +838,7 @@ export default function IntelliCredit() {
             {displayAiResult && (
               <>
                 <div style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:16, padding:24 }}>
-                  <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:12, marginBottom:16 }}>
+                  <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))", gap:12, marginBottom:16 }}>
                     {[{label:"Confidence",value:`${displayAiResult.confidence}%`,color:C.primary},{label:"Docs",value:displayAiResult.docsProcessed,color:C.emerald},{label:"Data Points",value:displayAiResult.dataPoints,color:"#7c3aed"},{label:"Sources",value:displayAiResult.externalSources,color:C.amber}].map(m=>(
                       <div key={m.label} style={{ textAlign:"center", padding:"14px", background:C.slate100, borderRadius:12 }}>
                         <div style={{ fontSize:22, fontWeight:800, color:m.color }}>{m.value}</div>
@@ -865,7 +884,7 @@ export default function IntelliCredit() {
         {/* Step 3 — Risk Analysis */}
         {step===3 && (
           <div style={{ display:"flex", flexDirection:"column", gap:16 }}>
-            <div style={{ display:"grid", gridTemplateColumns:"auto 1fr 1fr 1fr", gap:16 }}>
+            <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))", gap:16 }}>
               <div style={{ background:C.white, border:`1px solid ${C.border}`, borderRadius:16, padding:24, display:"flex", flexDirection:"column", alignItems:"center" }}>
                 <Gauge score={displayRisk.score} />
                 <p style={{ fontSize:12, color:C.slate500, marginTop:4 }}>Credit Score</p>
@@ -982,8 +1001,48 @@ export default function IntelliCredit() {
       </main>
 
       <style>{`
-        @keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
-        * { box-sizing: border-box; }
+        
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  h1 { font-size: 18px; }
+  h2 { font-size: 16px; }
+  h3 { font-size: 15px; }
+
+}
+
+/* Small phones */
+
+@media (max-width: 480px) {
+
+  main {
+    padding: 20px 16px !important;
+  }
+
+}
+
       `}</style>
     </div>
   );
