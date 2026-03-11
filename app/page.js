@@ -618,14 +618,19 @@ export default function IntelliCredit() {
 
           <div style={{
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(220px,1fr))",
-  gap: 16,
-  marginBottom: 36
+  gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))",
+  gap: 20,
+  marginBottom: 36,
+  width: "100%"
 }}>
             <MetricCard label="Total Appraisals" value={cases.length} icon="📁" />
-            <MetricCard label="Completed" value={done} color={C.emerald} icon="✅" />
-            <MetricCard label="In Progress" value={pending} color={C.amber} icon="⏳" />
-            <MetricCard label="Approved This Month" value={done} color={C.primary} icon="🏦" />
+
+<MetricCard label="Completed" value={done} color={C.emerald} icon="✅" />
+
+<MetricCard label="In Progress" value={pending} color={C.amber} icon="⏳" />
+
+<MetricCard label="Approved This Month" value={done} color={C.primary} icon="🏦" />
+            
           </div>
 
           <div style={{ background:C.white, borderRadius:20, border:`1px solid ${C.border}`, overflow:"hidden", boxShadow:"0 4px 20px rgba(0,0,0,0.06)", marginBottom:36 }}>
