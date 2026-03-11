@@ -615,13 +615,11 @@ export default function IntelliCredit() {
   margin:"0 auto",
   padding:"32px 20px"
 }}>
-
-          <div style={{
+<div style={{
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))",
-  gap: 20,
-  marginBottom: 36,
-  width: "100%"
+  gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+  gap: 16,
+  marginBottom: 36
 }}>
             <MetricCard label="Total Appraisals" value={cases.length} icon="📁" />
 
